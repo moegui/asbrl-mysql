@@ -1,0 +1,31 @@
+---
+- name: Create MySQL directory
+  file:
+    path: /home/{{default_user}}/mysql/
+    state: directory  
+
+- name: MySQL Data Volume
+  docker_volume:
+    name: mysql_data
+    state: present
+
+- name: MySQL config file
+  template:
+    src: my.cnf.j2
+    dest: /home/{{default_user}}/mysql/my.cnf    
+
+- name: MySQL
+  docker_container:
+    name: "mysql"
+    image: "{{ IMAGE }}:{{ BUILD }}"
+    pull: "true"
+    recreate: "yes"
+    env:
+      MYSQL_ROOT_PASSWORD: "{{ ROOT_PASSWORD }}"
+    state: "started"
+    restart_policy: "unless-stopped"
+    published_ports:
+      - "0.0.0.0:{{ PORT }}:{{ PORT }}"
+    volumes:
+      - /home/{{default_user}}/mysql/my.cnf:/etc/mysql/my.cnf
+      - mysql_data:/var/lib/mysql
