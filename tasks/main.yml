@@ -22,6 +22,9 @@
     recreate: "yes"
     env:
       MYSQL_ROOT_PASSWORD: "{{ ROOT_PASSWORD }}"
+      MYSQL_DATABASE: "{{NEW_DATABASE}}"
+      MYSQL_USER: "{{NEW_USER}}"
+      MYSQL_PASSWORD: "{{NEW_PASSWORD}}"
     state: "started"
     restart_policy: "unless-stopped"
     published_ports:
