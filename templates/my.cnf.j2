@@ -1,0 +1,70 @@
+# Copyright (c) 2017, Oracle and/or its affiliates. All rights reserved.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+#
+# The MySQL  Server configuration file.
+#
+# For explanations see
+# http://dev.mysql.com/doc/mysql/en/server-system-variables.html
+
+[mysqld]
+pid-file                    = /var/run/mysqld/mysqld.pid
+socket                      = /var/run/mysqld/mysqld.sock
+datadir                     = /var/lib/mysql
+secure-file-priv            = NULL
+
+# Engine
+default-storage-engine      = InnoDB
+
+# The TCP/IP Port the MySQL Server will listen on
+bind-address                = {{BIND_ADDRESS}}
+port                        = {{PORT}}
+datadir                     = /var/lib/mysql
+
+server-id                   = {{SERVER_ID}}
+
+max_connections             = {{MAX_CONNETIONS}}
+
+#*** MyISAM Specific options
+#myisam_max_sort_file_size  = 100G
+#myisam_sort_buffer_size    = 311M
+key_buffer_size             = {{KEY_BUFFER_SIZE}}
+#read_buffer_size           = 64K
+#read_rnd_buffer_size       = 256K
+
+#*** INNODB Specific options ***
+# innodb_data_home_dir      =
+# skip-innodb
+#innodb_flush_log_at_trx_commit= 1
+innodb_log_buffer_size      = {{INNODB_LOG_BUFFER_SIZE}}
+innodb_buffer_pool_size     = {{INNODB_BUFFER_POOL_SIZE}}
+innodb_log_file_size        = {{INNODB_LOG_FILE_SIZE}}
+#innodb_thread_concurrency  = 8
+#innodb_autoextend_increment= 64
+innodb_buffer_pool_instances = {{INNODB_BUFFER_POOL_INSTANCES}}
+#innodb_concurrency_tickets  = 5000
+#innodb_old_blocks_time      = 1000
+#innodb_open_files          = 300
+#innodb_stats_on_metadata   = 0
+innodb_file_per_table       = {{INNODB_FILE_PER_TABLE}}
+#innodb_checksum_algorithm  = 0
+
+# General and Slow logging.
+log-output                  = {{LOG_OUTPUT}}
+general-log                 = {{GENERAL_LOG}}
+general_log_file            = {{GENERAL_LOG_FILE}}
+slow-query-log              = {{SLOW_QUERY_LOG}}
+slow_query_log_file         = {{SLOW_QUERY_LOG_FILE}}
+long_query_time             = {{LONG_QUERY_TIME}}
