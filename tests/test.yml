@@ -1,5 +1,24 @@
 ---
-- hosts: localhost
-  remote_user: root
-  roles:
-    - asbrl-mysql/
+- name: Deploy
+  hosts: localhost
+  order: sorted
+  become: true
+
+  pre_tasks:
+
+  - name: copy role locally (DEBUG)
+    copy:
+      src: ../
+      dest: ./roles/asbrl-mysql
+  
+  tasks:
+
+  - name: Deploy Mysql
+    include_role:
+      name: asbrl-mysql
+    vars:
+      ROOT_PASSWORD: "Pa$$w0rd"
+      DOCKER_CPU_QUOTA: 100000
+      DOCKER_MEMORY: 1G
+    tags:
+      - mysql
