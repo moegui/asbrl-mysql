@@ -46,7 +46,7 @@ Example Playbook
         vars:
           ROOT_PASSWORD: '{{ MYSQL_ROOT_PASSWORD }}'
         tags:
-          - mysql
+          - asbrl-mysql
 
 License
 -------
